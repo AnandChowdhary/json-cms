@@ -3,7 +3,7 @@
 
 	<head>
 
-        <title>Admin Dashboard</title>
+        <title>Posts</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.php">Summary</a></li>
-                        <li><a href="posts.php">Posts</a></li>
+                        <li><a href="index.php">Summary</a></li>
+                        <li class="active"><a href="posts.php">Posts</a></li>
                         <li><a href="categories.php">Categories</a></li>
                         <li><a href="authors.php">Authors</a></li>
                         <li><a href="pages.php">Pages</a></li>
@@ -51,12 +51,38 @@
         </nav>
 
         <div class="container">
-            <h1>Summary</h1>
-            <div class="row">
-                <div class="col-md-4">One JSON file! authors, posts, pages</div>
-                <div class="col-md-4">Posts</div>
-                <div class="col-md-4">Posts</div>
-            </div>
+            <h1>Posts <a href="new-post.php" class="btn btn-primary">Create New Post</a></h1>
+            <table class="table table-striped" style="margin-top: 20px">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Post Name</th>
+                        <th>Post Slug</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Delete Post</th>
+                        <th>Permalink</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    $raw_data = file_get_contents("data.json");
+                    $data = json_decode($raw_data);
+                    $i = 1;
+                    foreach($data->posts as $post) {
+                        echo "<tr>
+                            <td>$i</td>
+                            <td>$post->title</td>
+                            <td>$post->slug</td>
+                            <td>$post->author</td>
+                            <td>$post->category</td>
+                            <td><a href='delete-post.php?slug=$post->slug'>Delete</a></td>
+                            <td><a target='_blank' href='../$post->slug'>Link to post</a></td>
+                        </tr>";
+                    }
+                ?>
+                </tbody>
+            </table>
         </div>
 
         <script src="../bootstrap.js"></script>
