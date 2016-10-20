@@ -76,9 +76,9 @@
                     </tr>
                 <?php
                     $raw_data = file_get_contents("data.json");
-                    $data = json_decode($raw_data);
+                    $data1 = json_decode($raw_data);
                     $i = 1;
-                    foreach($data->categories as $category) {
+                    foreach($data1->categories as $category) {
                         $nP = substr_count($raw_data, '"' . $category->slug . '"') - 1;
                         $i++;
                         echo "<tr>

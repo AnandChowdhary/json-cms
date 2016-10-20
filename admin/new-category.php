@@ -1,4 +1,15 @@
-<?php include "admin.php"; ?><!doctype html>
+<?php
+    include "admin.php";
+    if (isset($_POST["new"])) {
+        $name = $_POST["name"];
+        $slug = $_POST["slug"];
+        $cat1 = new category;
+        $cat1->name = $name;
+        $cat1->slug = $slug;
+        createCategory($cat1);
+        header("Location: categories.php");
+    }
+?><!doctype html>
 <html lang="en">
 
 	<head>
@@ -51,26 +62,6 @@
         </nav>
 
         <div class="container">
-        <?php
-            if (isset($_POST["new"])) {
-                $data = json_decode(file_get_contents("data.json"));
-                $name = $_POST["name"];
-                $slug = $_POST["slug"];
-                class category {
-                    public $name;
-                    public $slug;
-                }
-                $cat1 = new category;
-                $cat1->name = $name;
-                $cat1->slug = $slug;
-                $data->categories[sizeof($data->categories)] = $cat1;
-                $updated_data = json_encode($data, true);
-                $data_file = fopen("data.json", "w") or die("Unable to open file!");
-                fwrite($data_file, $updated_data);
-                fclose($data_file);
-                echo "New category created successfully. <a href='categories.php'>Continue</a>";
-            } else {
-        ?>
             <form method="post">
                 <fieldset>
                     <legend>New Category</legend>
@@ -79,16 +70,13 @@
                         <input name="name" type="text" class="form-control" id="name" placeholder="Enter category name">
                     </div>
                     <div class="form-group">
-                        <label for="slug">Category Name:</label>
+                        <label for="slug">Category Slug:</label>
                         <input name="slug" type="text" class="form-control" id="slug" placeholder="Enter category slug">
                     </div>
                     <input type="hidden" name="new" value="category">
                     <input type="submit" class="btn btn-default" value="Create Category">
                 </fieldset>
             </form>
-        <?php
-            }
-        ?>
         </div>
 
         <script src="../bootstrap.js"></script>
