@@ -84,13 +84,17 @@
                                 <input type="submit" class="btn btn-default" value="Create Category">';
                             break;
                         case "post":
+                            $useroptions = "";
+                            foreach($GLOBALS["data"]->authors as $author) {
+                                $useroptions .= "<option>" . $author->name . "</option>";
+                            }
                             echo '<div class="form-group">
                                     <label for="title">Post Title:</label>
                                     <input name="title" type="text" class="form-control" id="title" placeholder="Enter post title">
                                 </div>
                                 <div class="form-group">
                                     <label for="author">Post Author:</label>
-                                    <input name="author" type="text" class="form-control" id="author" placeholder="Enter post author">
+                                    <select name="author" id="author" class="form-control">'.$useroptions.'</select>
                                 </div>
                                 <div class="form-group">
                                     <label for="category">Post Category:</label>

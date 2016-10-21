@@ -79,7 +79,7 @@
                 </fieldset>
             </form><?php } ?>
 
-<?php if ($_GET["type"] == "post") { ?>
+<?php if ($_GET["type"] == "post") { $useroptions = ""; foreach($GLOBALS["data"]->authors as $author) { $useroptions .= "<option>" . $author->name . "</option>"; } ?>
             <form method="post">
                 <fieldset>
                     <legend>Edit Post</legend>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label for="author">Post Author:</label>
-                        <input name="author" type="text" class="form-control" id="author" value="<?php echo getInfo($slug, "post")->author; ?>">
+                        <select name="author" id="author" class="form-control"><option selected><?php echo getInfo($slug, "post")->author; ?></option><?php echo $useroptions; ?></select>
                     </div>
                     <div class="form-group">
                         <label for="category">Post Category:</label>
