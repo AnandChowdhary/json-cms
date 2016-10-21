@@ -6,7 +6,7 @@
         $cat1 = new category;
         $cat1->name = $name;
         $cat1->slug = $slug;
-        createCategory($cat1);
+        create($cat1, "category");
         header("Location: categories.php");
     }
 ?><!doctype html>

@@ -87,7 +87,7 @@
                             <td>$category->slug</td>
                             <td>$nP</td>                            
                             <td><a href='edit-category.php?slug=$category->slug'>Edit</a></td>
-                            <td><a href='delete-category.php?slug=$category->slug'>Delete</a></td>
+                            <td><a href='delete.php?slug=$category->slug&type=category'>Delete</a></td>
                             <td><a target='_blank' href='../category/$category->slug'>Link to category</a></td>
                         </tr>";
                     }
