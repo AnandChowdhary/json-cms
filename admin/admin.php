@@ -28,6 +28,18 @@
         public $desc;
     }
 
+    class page {
+        public $title;
+        public $slug;
+        public $body;
+    }
+
+    class setting {
+        public $name;
+        public $slug;
+        public $value;
+    }
+
     function getInfo($slug, $type) {
         switch($type) {
             case "category":

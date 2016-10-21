@@ -110,9 +110,34 @@
                         break;
                     case "pages":
                         echo '<a href="new.php?type=page" class="btn btn-primary">Create New Page</a></h1>';
+                        echo '<table class="table table-striped" style="margin-top: 20px"> <thead> <tr> <th>#</th> <th>Page Title</th> <th>Page Slug</th> <th>Edit Page</th> <th>Delete Page</th> <th>Permalink</th> </tr></thead> <tbody>';
+                        $i = 0;
+                        foreach($GLOBALS["data"]->pages as $page) {
+                            $i++;
+                            echo "<tr>
+                                <td>$i</td>
+                                <td>$page->title</td>
+                                <td>$page->slug</td>
+                                <td><a href='edit.php?slug=$page->slug&type=page'>Edit</a></td>
+                                <td><a href='delete.php?slug=$page->slug&type=page'>Delete</a></td>
+                                <td><a target='_blank' href='../$page->slug'>Link to page</a></td>
+                            </tr>";
+                        }
                         break;
                     case "settings":
                         echo '<a href="new.php?type=setting" class="btn btn-primary">Create New Setting</a></h1>';
+                        echo '<table class="table table-striped" style="margin-top: 20px"> <thead> <tr> <th>#</th> <th>Setting Name</th> <th>Setting Value</th> <th>Edit Setting</th> <th>Delete Setting</th> </tr></thead> <tbody>';
+                        $i = 0;
+                        foreach($GLOBALS["data"]->settings as $setting) {
+                            $i++;
+                            echo "<tr>
+                                <td>$i</td>
+                                <td>$setting->name</td>
+                                <td>$setting->value</td>
+                                <td><a href='edit.php?slug=$setting->slug&type=page'>Edit</a></td>
+                                <td><a href='delete.php?slug=$setting->slug&type=page'>Delete</a></td>
+                            </tr>";
+                        }
                         break;
                 }
             ?>

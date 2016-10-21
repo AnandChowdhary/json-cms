@@ -45,9 +45,26 @@
                 $author1->email = $_POST["email"];
                 $author1->desc = $_POST["desc"];
                 $author1->slug = $slug;
-                var_dump($author1);
                 create($author1, $_GET["type"]);
                 header("Location: content.php?type=authors");
+                break;
+            case "page":
+                $slug = str_replace(" ", "-", strtolower($_POST["title"]));
+                $page1 = new page;
+                $page1->title = $_POST["title"];
+                $page1->body = $_POST["body"];
+                $page1->slug = $slug;
+                create($page1, $_GET["type"]);
+                header("Location: content.php?type=pages");
+                break;
+            case "setting":
+                $slug = str_replace(" ", "-", strtolower($_POST["name"]));
+                $setting1 = new setting;
+                $setting1->name = $_POST["name"];
+                $setting1->value = $_POST["value"];
+                $setting1->slug = $slug;
+                create($setting1, $_GET["type"]);
+                header("Location: content.php?type=settings");
                 break;
         }
     }
@@ -169,6 +186,30 @@
                                 </div>
                                 <input type="hidden" name="new" value="author">
                                 <input type="submit" class="btn btn-default" value="Create Author">';
+                            break;
+                        case "page":
+                            echo '<div class="form-group">
+                                    <label for="title">Page Title:</label>
+                                    <input name="title" type="text" class="form-control" id="title" placeholder="Enter page title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="body">Body:</label>
+                                    <textarea name="body" id="body" class="form-control" placeholder="Enter page body"></textarea>
+                                </div>
+                                <input type="hidden" name="new" value="page">
+                                <input type="submit" class="btn btn-default" value="Create Page">';
+                            break;
+                        case "setting":
+                            echo '<div class="form-group">
+                                    <label for="name">Setting Name:</label>
+                                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter setting name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="value">Setting Value:</label>
+                                    <input name="value" type="text" class="form-control" id="value" placeholder="Enter setting value">
+                                </div>
+                                <input type="hidden" name="new" value="setting">
+                                <input type="submit" class="btn btn-default" value="Create Setting">';
                             break;
                     }
                 ?>
