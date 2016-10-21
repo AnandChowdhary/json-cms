@@ -1,13 +1,22 @@
 <?php
     include "admin.php";
-    if (isset($_POST["new"])) {
-        $name = $_POST["name"];
-        $slug = $_POST["slug"];
-        $cat1 = new category;
-        $cat1->name = $name;
-        $cat1->slug = $slug;
-        create($cat1, "category");
-        header("Location: categories.php");
+    if (isset($_POST["edit"])) {
+        delete($_POST["original_slug"], $_POST["edit"]);
+        switch($_POST["edit"]) {
+            case "category":
+                $content = new category;
+                $content->name = $_POST["name"];
+                $content->slug = $_POST["slug"];
+                create($content, $_POST["edit"]);
+                header("Location: content.php?type=categories");
+                break;
+        }
+    } else {
+        $slug = $_GET["slug"];
+        switch ($_GET["type"]) {
+            case "category":
+                $name = getInfo($slug, "category")->name;
+        }
     }
 ?><!doctype html>
 <html lang="en">
@@ -37,13 +46,12 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.php">Summary</a></li>
-                        <li><a href="posts.php">Posts</a></li>
-                        <li><a href="categories.php">Categories</a></li>
-                        <li><a href="authors.php">Authors</a></li>
-                        <li><a href="pages.php">Pages</a></li>
+                        <li><a href="content.php?type=posts">Posts</a></li>
+                        <li><a href="content.php?type=categories">Categories</a></li>
+                        <li><a href="content.php?type=authors">Authors</a></li>
+                        <li><a href="content.php?type=pages">Pages</a></li>
                         <li><a href="media.php">Media</a></li>
-                        <li><a href="settings.php">Settings</a></li>
+                        <li><a href="content.php?type=settings">Settings</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -61,20 +69,20 @@
             </div>
         </nav>
 
-        <div class="container">
-            <form method="post">
+        <div class="container"><form method="post">
                 <fieldset>
                     <legend>New Category</legend>
                     <div class="form-group">
                         <label for="name">Category Name:</label>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Enter category name">
+                        <input name="name" type="text" class="form-control" id="name" value="<?php echo $name; ?>">
                     </div>
                     <div class="form-group">
                         <label for="slug">Category Slug:</label>
-                        <input name="slug" type="text" class="form-control" id="slug" placeholder="Enter category slug">
+                        <input name="slug" type="text" class="form-control" id="slug" value="<?php echo $slug; ?>">
                     </div>
-                    <input type="hidden" name="new" value="category">
-                    <input type="submit" class="btn btn-default" value="Create Category">
+                    <input type="hidden" name="original_slug" value="<?php echo $slug; ?>">
+                    <input type="hidden" name="edit" value="category">
+                    <input type="submit" class="btn btn-default" value="Update Category">
                 </fieldset>
             </form>
         </div>

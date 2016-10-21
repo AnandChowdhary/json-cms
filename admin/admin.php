@@ -1,10 +1,50 @@
 <?php
 
-    $GLOBALS["data"] = json_decode(file_get_contents("data.json"));
+    date_default_timezone_set("Asia/Kolkata");
+    $GLOBALS["raw_data"] = file_get_contents("data.json");
+    $GLOBALS["data"] = json_decode($GLOBALS["raw_data"]);
     
     class category {
         public $name;
         public $slug;
+    }
+
+    class post {
+        public $title;
+        public $slug;
+        public $author;
+        public $datetime;
+        public $category;
+        public $tags;
+        public $visible;
+        public $excerpt;
+        public $body;
+    }
+
+    function getInfo($slug, $type) {
+        switch($type) {
+            case "category":
+                $contents = $GLOBALS["data"]->categories;
+                break;
+            case "post":
+                $contents = $GLOBALS["data"]->posts;
+                break;
+            case "author":
+                $contents = $GLOBALS["data"]->authors;
+                break;
+            case "page":
+                $contents = $GLOBALS["data"]->pages;
+                break;
+            case "setting":
+                $contents = $GLOBALS["data"]->settings;
+                break;
+        }
+        foreach ($contents as $content) {
+            if ($content->slug == $slug) {
+                return $content;
+                break;
+            }
+        }
     }
 
     function updateData() {
@@ -78,10 +118,7 @@
                 $GLOBALS["data"]->settings = $contents;
                 break;
         }
-        $updated_data = json_encode($GLOBALS["data"], true);
-        $file = fopen("data.json", "w") or die("Unable to open file!");
-        fwrite($file, $updated_data);
-        fclose($file);
+        updateData();
     }
 
 ?>
