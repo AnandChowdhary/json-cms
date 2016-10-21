@@ -162,4 +162,4 @@
                     }
                 ?>
                 </fieldset>
-            </form>
+            </form><?php foot(); ?>

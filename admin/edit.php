@@ -34,4 +34,4 @@
                     <input type="hidden" name="edit" value="category">
                     <input type="submit" class="btn btn-default" value="Update Category">
                 </fieldset>
-            </form>
+            </form><?php foot(); ?>

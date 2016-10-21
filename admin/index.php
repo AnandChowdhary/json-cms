@@ -6,7 +6,7 @@
     if (isset($_POST["username"])) {
         if ($_POST["username"] == "anand") {
             if ($_POST["password"] == "anand01") {
-                $_SESSION["admin"] = "admin";
+                $_SESSION["admin"] = "Anand Chowdhary";
                 header("Location: content.php?type=posts");   
             }
         }

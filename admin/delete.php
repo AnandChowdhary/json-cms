@@ -2,6 +2,8 @@
     include "admin.php";
     if ($_GET["type"] == "file") {
         unlink("../media/" . $_GET["slug"]);
+    } else if ($_GET["type"] == "filemgr") {
+        unlink($_GET["slug"]);
     } else {
         delete($_GET["slug"], $_GET["type"]);
     }
@@ -23,6 +25,9 @@
             break;
         case "file":
             header("Location: media.php");
+            break;
+        case "filemgr":
+            header("Location: editor.php");
             break;
     }
 ?>
