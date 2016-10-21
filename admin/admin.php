@@ -1,5 +1,10 @@
 <?php
 
+    session_start();
+    if (!isset($_SESSION["admin"])) {
+        header("Location: index.php");
+    }
+
     date_default_timezone_set("Asia/Kolkata");
     $GLOBALS["raw_data"] = file_get_contents("data.json");
     $GLOBALS["data"] = json_decode($GLOBALS["raw_data"]);

@@ -62,17 +62,13 @@
         <div class="container">
             <h1>Media</h1>
             <form method="post" enctype="multipart/form-data">
-                <fieldset>
-                    <legend>Upload New Media</legend>
-                    <div class="form-group">
-                        <label for="name">File:</label>
-                        <input name="file" type="file" class="form-control" id="file">
-                    </div>
-                    <input type="submit" value="Upload File" class="btn btn-primary">
-                </fieldset>
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-md-6"><input name="file" type="file" class="form-control" id="file"></div>
+                    <div class="col-md-6"><input type="submit" value="Upload File" class="btn btn-primary"></div>
+                </div>
             </form>
             <h2 style="margin-top: 30px">Your Files</h2>
-            <table class="table table-striped" style="margin-top: 20px"> <thead> <tr> <th>#</th> <th>File Name</th> <th>File Type</th> <th>Delete File</th> <th>File Permalink</th></tr></thead> <tbody>
+            <table class="table table-striped" style="margin-top: 30px"> <thead> <tr> <th>#</th> <th>File Name</th> <th>File Type</th> <th>Delete File</th> <th>File Permalink</th></tr></thead> <tbody>
         <?php
             $dir = "../media/"; $i = 0;
             if (is_dir($dir)) {
