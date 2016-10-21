@@ -85,8 +85,8 @@
                                 <td>$i</td>
                                 <td>$setting->name</td>
                                 <td>$setting->value</td>
-                                <td><a href='edit.php?slug=$setting->slug&type=page'>Edit</a></td>
-                                <td><a href='delete.php?slug=$setting->slug&type=page'>Delete</a></td>
+                                <td><a href='edit.php?slug=$setting->slug&type=setting'>Edit</a></td>
+                                <td><a href='delete.php?slug=$setting->slug&type=setting'>Delete</a></td>
                             </tr>";
                         }
                         break;

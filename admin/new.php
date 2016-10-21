@@ -162,4 +162,5 @@
                     }
                 ?>
                 </fieldset>
+                <script> CKEDITOR.replace("body"); </script>
             </form><?php foot(); ?>
