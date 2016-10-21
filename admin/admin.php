@@ -45,6 +45,17 @@
         public $value;
     }
 
+    $users = array(
+        array("anand", "c35b26adc7e4199250a6eb49b2a33ac1", "sudo")
+    );
+
+    function updateData() {
+        $updated_data = json_encode($GLOBALS["data"], true);
+        $file = fopen("data.json", "w") or die("Unable to open file!");
+        fwrite($file, $updated_data);
+        fclose($file);
+    }
+
     function getInfo($slug, $type) {
         switch($type) {
             case "category":
@@ -69,13 +80,6 @@
                 break;
             }
         }
-    }
-
-    function updateData() {
-        $updated_data = json_encode($GLOBALS["data"], true);
-        $file = fopen("data.json", "w") or die("Unable to open file!");
-        fwrite($file, $updated_data);
-        fclose($file);
     }
     
     function create($content, $type = "category") {
@@ -143,6 +147,21 @@
                 break;
         }
         updateData();
+    }
+
+    function head($title) {
+        echo '<!DOCTYPE html><html lang=en><title>'.$title.'</title><meta charset=utf-8><meta content="IE=edge"http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1"name=viewport><link href=../bootstrap.css rel=stylesheet><body style="padding:70px 0 30px 0"><nav class="navbar navbar-default navbar-fixed-top"><div class=container><div class=navbar-header><button aria-controls=navbar aria-expanded=false class="collapsed navbar-toggle"data-target=#navbar data-toggle=collapse type=button><span class=sr-only>Toggle navigation</span> <span class=icon-bar></span><span class=icon-bar></span><span class=icon-bar></span></button><a class=navbar-brand href=index.php>Admin Dashboard</a></div><div class="collapse navbar-collapse"id=navbar><ul class="nav navbar-nav">';
+        if ($title == "Posts") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="content.php?type=posts">Posts</a></li></li>';
+        if ($title == "Categories") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="content.php?type=categories">Categories</a></li></li>';
+        if ($title == "Authors") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="content.php?type=authors">Authors</a></li></li>';
+        if ($title == "Pages") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="content.php?type=pages">Pages</a></li></li>';
+        if ($title == "Media") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="media.php">Media</a></li></li>';
+        if ($title == "Settings") { echo "<li class='active'>"; } else { echo "<li>"; } echo '<a href="content.php?type=settings">Settings</a></li></li>';
+        echo '</ul> <ul class="nav navbar-nav navbar-right"> <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a> <ul class="dropdown-menu"> <li><a href="editor.php?file=data.json">JSON datafile</a></li><li><a href="../">Visit site</a></li><li><a href="logout.php">Log out</a></li></ul> </li></ul> </div></div></nav> <div class="container">';
+    }
+
+    function foot() {
+        echo '</div><script src="../bootstrap.js"></script></body></html>';
     }
 
 ?>

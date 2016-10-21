@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION["username"])) {
+    if (isset($_SESSION["admin"])) {
         header("Location: content.php?type=posts");
     }
     if (isset($_POST["username"])) {
