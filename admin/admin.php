@@ -21,6 +21,13 @@
         public $body;
     }
 
+    class author {
+        public $name;
+        public $slug;
+        public $email;
+        public $desc;
+    }
+
     function getInfo($slug, $type) {
         switch($type) {
             case "category":

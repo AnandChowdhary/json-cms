@@ -38,6 +38,17 @@
                 create($post1, $_GET["type"]);
                 header("Location: content.php?type=posts");
                 break;
+            case "author":
+                $slug = str_replace(" ", "-", strtolower($_POST["name"]));
+                $author1 = new author;
+                $author1->name = $_POST["name"];
+                $author1->email = $_POST["email"];
+                $author1->desc = $_POST["desc"];
+                $author1->slug = $slug;
+                var_dump($author1);
+                create($author1, $_GET["type"]);
+                header("Location: content.php?type=authors");
+                break;
         }
     }
 ?><!doctype html>
@@ -77,15 +88,13 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><strong>Create New...</strong> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="new-post.php">New Post</a></li>
-                                <li><a href="new-author.php">New Author</a></li>
-                                <li><a href="new-page.php">New Page</a></li>
-                                <li><a href="new-category.php">New Category</a></li>
+                                <li><a href="editor.php?file=data.json">JSON datafile</a></li>
+                                <li><a href="../">Visit site</a></li>
+                                <li><a href="logout.php">Log out</a></li>
                             </ul>
                         </li>
-                        <li><a href="logout.php">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -144,6 +153,22 @@
                                 </div>
                                 <input type="hidden" name="new" value="post">
                                 <input type="submit" class="btn btn-default" value="Create Post">';
+                            break;
+                        case "author":
+                            echo '<div class="form-group">
+                                    <label for="name">Author Name:</label>
+                                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter author name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Author Email:</label>
+                                    <input name="email" type="email" class="form-control" id="email" placeholder="Enter author email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc">Author Description:</label>
+                                    <textarea name="desc" id="desc" class="form-control" placeholder="Enter author description"></textarea>
+                                </div>
+                                <input type="hidden" name="new" value="author">
+                                <input type="submit" class="btn btn-default" value="Create Author">';
                             break;
                     }
                 ?>

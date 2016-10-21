@@ -35,15 +35,13 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><strong>Create New...</strong> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="new-post.php">New Post</a></li>
-                                <li><a href="new-author.php">New Author</a></li>
-                                <li><a href="new-page.php">New Page</a></li>
-                                <li><a href="new-category.php">New Category</a></li>
+                                <li><a href="editor.php?file=data.json">JSON datafile</a></li>
+                                <li><a href="../">Visit site</a></li>
+                                <li><a href="logout.php">Log out</a></li>
                             </ul>
                         </li>
-                        <li><a href="logout.php">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,6 +92,21 @@
                         break;
                     case "authors":
                         echo '<a href="new.php?type=author" class="btn btn-primary">Create New Author</a></h1>';
+                        echo '<table class="table table-striped" style="margin-top: 20px"> <thead> <tr> <th>#</th> <th>Author Name</th> <th>Author Email</th> <th>Post Count</th> <th>Edit Author</th> <th>Delete Author</th> <th>Permalink</th> </tr></thead> <tbody>';
+                        $i = 0;
+                        foreach($GLOBALS["data"]->authors as $author) {
+                            $nP = substr_count($GLOBALS["raw_data"], '"author":"' . $author->name . '"');
+                            $i++;
+                            echo "<tr>
+                                <td>$i</td>
+                                <td>$author->name</td>
+                                <td>$author->email</td>
+                                <td>$nP</td>                            
+                                <td><a href='edit.php?slug=$author->slug&type=author'>Edit</a></td>
+                                <td><a href='delete.php?slug=$author->slug&type=author'>Delete</a></td>
+                                <td><a target='_blank' href='../author/$author->slug'>Link to author</a></td>
+                            </tr>";
+                        }
                         break;
                     case "pages":
                         echo '<a href="new.php?type=page" class="btn btn-primary">Create New Page</a></h1>';

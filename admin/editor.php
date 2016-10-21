@@ -1,9 +1,17 @@
-<!doctype html>
+<?php
+    include "admin.php";
+    if (isset($_POST["editor_data"])) {
+        $file = fopen($_GET["file"], "w") or die("Unable to open file!");
+        fwrite($file, $_POST["editor_data"]);
+        fclose($file);
+        header("Location: editor.php?file=" . $_GET["file"]);
+    }
+?><!doctype html>
 <html lang="en">
 
 	<head>
 
-        <title>Media</title>
+        <title>Editor</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +38,7 @@
                         <li><a href="content.php?type=categories">Categories</a></li>
                         <li><a href="content.php?type=authors">Authors</a></li>
                         <li><a href="content.php?type=pages">Pages</a></li>
-                        <li class="active"><a href="media.php">Media</a></li>
+                        <li><a href="media.php">Media</a></li>
                         <li><a href="content.php?type=settings">Settings</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -48,7 +56,12 @@
         </nav>
 
         <div class="container">
-            <h1>Media</h1>
+            <h1>Editor</h1>
+            <form method="post" style="margin-top: 20px">
+                <input class="form-control" value="<?php echo $_GET['file']; ?>" disabled>
+                <textarea style="margin-top: 20px" name="editor_data" rows="10" class="form-control"><?php echo file_get_contents($_GET["file"]); ?></textarea>
+                <input style="margin-top: 20px" type="submit" class="btn btn-primary" value="Save File">
+            </form>
         </div>
 
         <script src="../bootstrap.js"></script>

@@ -55,15 +55,13 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><strong>Create New...</strong> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="new-post.php">New Post</a></li>
-                                <li><a href="new-author.php">New Author</a></li>
-                                <li><a href="new-page.php">New Page</a></li>
-                                <li><a href="new-category.php">New Category</a></li>
+                                <li><a target="_blank" href="editor.php?file=data.json">JSON datafile</a></li>
+                                <li><a href="../">Visit site</a></li>
+                                <li><a href="logout.php">Log out</a></li>
                             </ul>
                         </li>
-                        <li><a href="logout.php">Log out</a></li>
                     </ul>
                 </div>
             </div>
