@@ -38,10 +38,20 @@
 ?><!doctype html>
 <html>
     <head>
-        <title><?php echo getInfo("site-title", "setting")->value; ?></title>
-        <meta name="twitter:title" content="Made with Love in India">
-        <meta property="og:title" content="Made with Love in India">
+        
         <meta property="og:site_name" content="<?php echo getInfo("site-title", "setting")->value; ?>">
+        <?php
+            if ($type == "post") {
+                echo "\n<title>".getInfo($content, $type)->title." &middot; ".getInfo("site-title", "setting")->value."</title>\n";
+                echo "<meta property='og:title' content='".getInfo($content, $type)->title." - ".getInfo("site-title", "setting")->value."'>\n";
+                echo "<meta name='twitter:title' content='".getInfo($content, $type)->title." - ".getInfo("site-title", "setting")->value."'>\n";
+                echo "<meta name='description' content='".getInfo($content, $type)->excerpt."'>\n";
+                echo "<meta name='author' content='".getInfo($content, $type)->author."'>\n";
+            } else if ($type == "page") {
+                echo "<title>".getInfo($content, $type)->title." &middot; ".getInfo("site-title", "setting")->value."</title>";
+            }
+        ?>
+        
         <meta name="generator" content="JSONCMS v0.9">
     </head>
     <body>
