@@ -49,10 +49,10 @@
             <div class="container">
                 <nav class="navbar">
                     <ul class="nav">
-                        <li><a href="?">Home</a></li>
-                        <li><a href="?content=about&type=page">About us</a></li>
-                        <li><a href="?content=contact&type=page">Contact us</a></li>
-                        <li><a href="?content=blog&type=page">Blog</a></li>
+                        <li><a href=".">Home</a></li>
+                        <li><a href="about">About us</a></li>
+                        <li><a href="contact">Contact us</a></li>
+                        <li><a href="blog">Blog</a></li>
                     </ul>
                 </nav>
             </div>
@@ -66,7 +66,7 @@
                     if ($content == "blog") {
                         echo "<ul>";
                         foreach($GLOBALS["data"]->posts as $post) {
-                            echo "<li><strong>$post->title</strong><br>$post->author<br>$post->datetime<br>$post->category<br><br></li>";
+                            echo "<li><a href='post/$post->slug'><strong>$post->title</strong><br>$post->author<br>$post->datetime<br>$post->category<br><br></a></li>";
                         }
                         echo "</ul>";
                     }
