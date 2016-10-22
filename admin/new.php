@@ -137,7 +137,8 @@
                                     <textarea name="desc" id="desc" class="form-control" placeholder="Enter author description"></textarea>
                                 </div>
                                 <input type="hidden" name="new" value="author">
-                                <input type="submit" class="btn btn-default" value="Create Author">';
+                                <input type="submit" class="btn btn-default" value="Create Author">
+                                <script> CKEDITOR.replace("desc"); </script>';
                             break;
                         case "page":
                             echo '<div class="form-group">
